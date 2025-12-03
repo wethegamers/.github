@@ -49,12 +49,15 @@
 
 **STOP! Before accessing secrets, API tokens, or credentials:**
 
-### Vault is accessed via Tailscale - NOT port-forward!
+### Vault is accessed via Tailscale DNS - NOT port-forward or MagicDNS!
 
 ```bash
-# CORRECT - Use Tailscale MagicDNS hostname
-export VAULT_ADDR="https://vault-staging.tail5e286b.ts.net"
+# CORRECT - Use ts.wtgg.org A record (resolves to Tailscale IP via Cloudflare DNS)
+export VAULT_ADDR="https://vault-staging.ts.wtgg.org"
 export VAULT_TOKEN="<from one of the methods below>"
+
+# WRONG - MagicDNS doesn't have vault-staging
+# export VAULT_ADDR="https://vault-staging.tail5e286b.ts.net"  # NO! NXDOMAIN
 
 # WRONG - Do NOT use port-forward for Vault
 # kubectl port-forward -n vault svc/vault-active 8200:8200  # NO!
@@ -80,7 +83,7 @@ grep '^ROOT_TOKEN=' /home/seb/wtg/.archive/old-docs/VAULT_CREDENTIALS_REGEN_2025
 
 ### Quick Vault Access:
 ```bash
-export VAULT_ADDR="https://vault-staging.tail5e286b.ts.net"
+export VAULT_ADDR="https://vault-staging.ts.wtgg.org"
 # Use any of the three methods above:
 export VAULT_TOKEN="$(kubectl -n vault get secrets/vault-unseal-secret --template='{{index .data "root-token"}}' | base64 -d)"
 vault status  # Should show Sealed=false
