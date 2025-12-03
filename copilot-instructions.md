@@ -1,7 +1,7 @@
 # WTG Platform – Master AI Agent Instructions
 
-**Version**: 1.2.0  
-**Last Updated**: 2025-12-01  
+**Version**: 1.3.0  
+**Last Updated**: 2025-06-26  
 **Scope**: All WTG repositories
 
 > ⚠️ **IMPORTANT**: This is the master instruction file for all WTG repositories.  
@@ -354,6 +354,31 @@ Each repository has its own `.github/copilot-instructions.md` with:
 **Always read both**:
 1. This master file (platform context)
 2. The repo's own instructions (local context)
+
+---
+
+## MCP Server Tools
+
+When working in VS Code with Copilot, the following MCP (Model Context Protocol) servers are available:
+
+### GitHub MCP Server (`mcp_io_github_git_*`)
+Use GitHub MCP tools for repository operations:
+- **Issues**: `search_issues`, `issue_read`, `issue_write`, `list_issues`
+- **Pull Requests**: `list_pull_requests`, `create_pull_request`, `pull_request_read`
+- **Code Search**: `search_code`, `get_file_contents`
+- **Branches**: `list_branches`, `create_branch`
+- **Commits**: `list_commits`, `get_commit`
+
+Prefer these tools over manual git commands when interacting with GitHub APIs.
+
+### Important Notes
+- Always use MCP tools when available instead of running CLI commands
+- For Terraform operations, remember to export Vault credentials first:
+  ```bash
+  export VAULT_ADDR="https://vault-staging.tail5e286b.ts.net"
+  export VAULT_TOKEN="$(kubectl -n vault get secrets/vault-unseal-secret --template='{{index .data "root-token"}}' | base64 -d)"
+  export TF_VAR_cloudflare_api_token="$(vault kv get -field=TF_API_TOKEN secret/global/cloudflare)"
+  ```
 
 ---
 
