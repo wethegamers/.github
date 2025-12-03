@@ -1,7 +1,7 @@
 # WTG Platform – Master AI Agent Instructions
 
-**Version**: 1.3.0  
-**Last Updated**: 2025-06-26  
+**Version**: 1.4.0  
+**Last Updated**: 2025-12-03  
 **Scope**: All WTG repositories
 
 > ⚠️ **IMPORTANT**: This is the master instruction file for all WTG repositories.  
@@ -196,6 +196,19 @@ All canonical documentation lives in `/home/seb/wtg/operations/docs/`:
 | `manuals/07-GITOPS-APP-OF-APPS-MANUAL.md` | ArgoCD patterns |
 | `manuals/08-ARGO-WORKFLOWS-CICD-MANUAL.md` | CI/CD with Argo Workflows |
 
+### Guides (How-To Documentation)
+| File | Topics |
+|------|--------|
+| `guides/AGIS-LOCAL-DEVELOPMENT.md` | AGIS local build, test, Docker |
+| `guides/GITOPS-APPLICATION-PATTERN.md` | Adding apps to GitOps |
+| `guides/AI-USER-MANUAL.md` | AI agent usage guide |
+
+### ADRs (Architecture Decision Records)
+| File | Decision |
+|------|----------|
+| `../adr/001-component-based-deployment-model.md` | Component deployment strategy |
+| `../adr/002-agis-open-core-architecture.md` | AGIS open core (BSL-1.1 + private) |
+
 ---
 
 ## Repository Map
@@ -203,7 +216,8 @@ All canonical documentation lives in `/home/seb/wtg/operations/docs/`:
 | Repository | Language | Purpose | Has Instructions |
 |------------|----------|---------|------------------|
 | `ai` | Markdown | AI prompts, instructions & guidance | ✅ |
-| `agis-bot` | Go | Discord bot for gaming communities | ✅ |
+| `agis` | Go | Discord bot - Open Core (public) | ✅ |
+| `agis-core` | Go | Premium features (private) | ✅ |
 | `ansible` | YAML | Node provisioning | ✅ |
 | `branding` | Assets | Logos and style guides | ✅ |
 | `charts` | Helm | Shared Helm charts | ✅ |
