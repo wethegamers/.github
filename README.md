@@ -47,6 +47,12 @@ The `copilot-instructions.md` file provides platform-wide context for GitHub Cop
 ```
 .github/
 ├── copilot-instructions.md   # Master AI agent instructions
+├── PULL_REQUEST_TEMPLATE.md  # Default PR template for all repos
+├── ISSUE_TEMPLATE/           # Default issue templates
+│   ├── bug_report.md
+│   ├── feature_request.md
+│   ├── question.md
+│   └── config.yml
 ├── prompts/                  # VS Code Copilot prompt files
 │   ├── doc-writer.prompt.md
 │   ├── software-engineer.prompt.md
@@ -54,3 +60,12 @@ The `copilot-instructions.md` file provides platform-wide context for GitHub Cop
 └── profile/                  # GitHub organization profile
     └── README.md
 ```
+
+### Organization-Wide Templates
+
+This repo provides **default templates** for all WTG repositories:
+
+- **Issue Templates**: Bug reports, feature requests, questions
+- **PR Template**: Standard pull request format
+
+Individual repos can override these by adding their own templates in their `.github/` folder.
