@@ -77,8 +77,11 @@ kubectl -n vault-breakglass get secret vault-breakglass-credentials -o jsonpath=
 
 ### Option C: From Local Credentials File
 ```bash
-# Original credentials file location
-grep '^ROOT_TOKEN=' /home/seb/wtg/.archive/old-docs/VAULT_CREDENTIALS_REGEN_20251117-001745.txt | cut -d= -f2
+# Current credentials file (post-recovery 2025-12-04)
+cat /home/seb/wtg/.archive/VAULT_CREDENTIALS_RECOVERED_20251204-*.txt
+
+# Or extract just the root token:
+grep '^ROOT_TOKEN=' /home/seb/wtg/.archive/VAULT_CREDENTIALS_RECOVERED_20251204-*.txt | cut -d= -f2
 ```
 
 ### Quick Vault Access:
@@ -108,10 +111,11 @@ export TF_VAR_cloudflare_api_token="$(vault kv get -field=TF_API_TOKEN secret/gl
 | `secret/staging/{app}` | Staging app secrets |
 | `secret/development/{app}` | Dev app secrets |
 
-### Transit Auto-Unseal Architecture:
-- **Staging Vault** auto-unseals via Transit Vault on dev cluster
-- Transit Vault: `http://100.66.246.116:30200`
-- Recovery keys in: `/home/seb/wtg/.archive/VAULT_TRANSIT_AUTOUNSEAL_COMPLETE_20251201.txt`
+### Vault Seal Configuration:
+- **Staging Vault** uses Shamir seal (manual unseal required after restart)
+- Unseal keys (need 2 of 3): stored in `vault-unseal-secret` and `.archive/`
+- Recovery from 2025-12-04: transit seal removed after dev cluster rebuild
+- Credentials: `/home/seb/wtg/.archive/VAULT_CREDENTIALS_RECOVERED_20251204-*.txt`
 
 ---
 
